@@ -1,6 +1,5 @@
 import wordcloud
 
-
 def generate():    
     with open('content.txt','r') as f:
         l = f.readlines()
