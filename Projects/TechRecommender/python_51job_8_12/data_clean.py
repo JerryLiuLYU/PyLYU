@@ -52,9 +52,9 @@ def data_clearing(walden, sheet_tab):
         if data['requests'] and len(data['requests'][-1]) >= 6:
             del data['requests'][-1]
         request = list(n for a in data['requests'] for n in a)
-        request = seta = {
-            '职位': data['title'],t(request)
-        mongodb_da
+        request = set(request)
+        mongodb_data = {
+            '职位':data['title'],
             '公司': data['company'],
             '月薪': salary,
             '地区': location,
