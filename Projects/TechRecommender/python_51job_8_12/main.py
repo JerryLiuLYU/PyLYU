@@ -20,5 +20,5 @@ if __name__ == '__main__':
             html2 = get_content2(link)
             save(sheet_tab, get3(html2))
     print('存储完成！')
-    data_clean(walden, sheet_tab)
+    data_clearing(walden, sheet_tab)
 
