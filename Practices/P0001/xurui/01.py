@@ -1,7 +1,11 @@
-list = [56,12,1,8,354,10,100,34,56,7,23,456,234,-58]
-def sortport():
-    for i in range(len(list)-1):
-        for j in range(len(list)-1-i):
-            if list[j] > list[j+1]:
-                list[j],list[j+1] = list[j+1],list[j]
-    return list
+import random
+lis = [random.randint(0,100) for i in range(20)]
+def sortport(lis):
+    for i in range(len(lis)-1):
+        for j in range(len(lis)-1-i):
+            if lis[j] > lis[j+1]:
+                lis[j],lis[j+1] = lis[j+1],lis[j]
+    return lis
+print(lis)
+sortport(lis)
+print(lis)
