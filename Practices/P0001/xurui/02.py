@@ -4,4 +4,6 @@ def power(x,n):
         n = n - 1
         s = s * x
     return s
-
+x,n = input().split()
+x,n = eval(x),eval(n)
+print(power(x,n))
