@@ -1,0 +1,5 @@
+先运行Teacher.py(在控制台输入python Teacher.py)，再运行Student.py(在控制台输入python Student.py)
+
+测试：在任何程序输入字符。
+
+效果：会在Teacher.py控制台显示输入的字符。
