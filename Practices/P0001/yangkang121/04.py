@@ -1,1 +1,2 @@
-[d for d in os.listdir('.')]
+l = ['Hello','World','IBM','Apple']
+[s.lower() for s in l]
