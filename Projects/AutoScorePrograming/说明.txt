@@ -1,5 +1,7 @@
-先运行Teacher.py(在控制台输入python Teacher.py)，再运行Student.py(在控制台输入python Student.py)
+先运行XueshengKaoQin.pyw(在控制台输入python XueshengKaoQin.pyw)，再运行XueshengKaoQin_Client.pyw(在控制台输入python XueshengKaoQin_Client.pyw)
 
-测试：在任何程序输入字符。
+1.教师端先导入学生信息（格式为学生导入.xlsx），再导入关键字。
+2.教师端设置点名
+4.学生端登陆（学号、姓名）
 
-效果：会在Teacher.py控制台显示输入的字符。
+效果：学生端自动发送键盘记录至教师端。教师端生成成绩。
