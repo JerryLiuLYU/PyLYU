@@ -1,3 +1,4 @@
+import os
 def show_dir(filepa):
     for i in os.listdir(filepa):
         path= (os.path.join(filepa,i))

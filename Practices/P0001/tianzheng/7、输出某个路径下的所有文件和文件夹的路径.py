@@ -1,3 +1,4 @@
+import os
 def print_dir():
     filepath = input("请输入一个路径：")
     if filepath =="":
