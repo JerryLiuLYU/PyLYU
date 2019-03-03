@@ -1,0 +1,5 @@
+d=int(input("请输入数字："))
+print("Ten:",d)
+print("Two:",bin(d))
+print("Eight:",oct(d))
+print("Sixteen:",hex(d))
