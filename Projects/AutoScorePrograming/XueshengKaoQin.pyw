@@ -134,10 +134,10 @@ def closeWindow():
 ##        int_server.set(0)
     int_sendServerIP.set(0)
     root.destroy()
-    sql1='delete from students'
-    sql2='delete from dianming'
-    Common.doSQL(sql1)
-    Common.doSQL(sql2)
+    # sql1='delete from students'
+    # sql2='delete from dianming'
+    # Common.doSQL(sql1)
+    # Common.doSQL(sql2)
     sys.exit()
     exit()
 root.protocol('WM_DELETE_WINDOW', closeWindow)
@@ -152,6 +152,10 @@ isZhuce()
 ## =====================导入学生信息功能代码开始==============================
 def buttonImportXueshengXinxiClick():
     # 如果还没有注册，拒绝运行
+    sql1='delete from students'
+    sql2='delete from dianming'
+    Common.doSQL(sql1)
+    Common.doSQL(sql2)
     if int_zhuce.get() == 0:
         tkinter.messagebox.showerror('很抱歉', '请联系作者进行软件注册！')
         return
@@ -551,6 +555,8 @@ def getkeywords():
     filename1 = tkinter.filedialog.askopenfilename(title='请选择txt文件',
                                                   filetypes=[('TXT Files','*.txt')])
     if filename1:
+        jieba.set_dictionary("dict.txt")
+        jieba.initialize()
         jieba.load_userdict(filename1)
         global keyword
         with open(filename1,'r') as f:
