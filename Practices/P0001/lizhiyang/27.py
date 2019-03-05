@@ -1,0 +1,8 @@
+a=str(input())
+print(a.isalnum())
+print(a.isalpha())
+print(a.isdigit())
+print(a.islower())
+print(a.isupper())
+print(a.istitle())
+print(a.isspace())
