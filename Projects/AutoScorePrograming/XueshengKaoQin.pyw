@@ -155,6 +155,7 @@ def buttonImportXueshengXinxiClick():
     sql1='delete from students'
     sql2='delete from dianming'
     Common.doSQL(sql1)
+    time.sleep(1)
     Common.doSQL(sql2)
     if int_zhuce.get() == 0:
         tkinter.messagebox.showerror('很抱歉', '请联系作者进行软件注册！')
@@ -202,6 +203,8 @@ buttonIP.place(x=240, y=20, height=30, width=100)
 int_canDianming = tkinter.IntVar(root, value=0)
 def thread_Dianming():
     # 开始监听
+    sqll='delete from dianming'
+    Common.doSQL(sqll)
     global sockDianming
     sockDianming = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sockDianming.bind(('', 30303))
@@ -512,17 +515,17 @@ def everyStudent(conn):
            
  # 接收键盘数据    
     temp = conn.recv(40096)  
+    print("-------temp-----")
+    print(temp.decode().lower())
+    print("-------reslult-----")
     result = jieba.lcut(temp.decode().lower())
+    print(result)
+    print(keyword)
     count = 0
     for i in result:
         if i in keyword:
             count = count+1  
-    lastkey = studentkeys.get(xuehao)
-    if not lastkey:
-        # 第一次自动点名
-        studentkeys[xuehao] = count
-    else:
-        studentkeys[xuehao] = studentkeys.get(xuehao,0)+count
+    studentkeys[xuehao] = studentkeys.get(xuehao,0)+count
     sqlkey = "update students set score= "+str(studentkeys[xuehao])+" where xuehao = "+xuehao
     Common.doSQL(sqlkey)
     conn.close() 
@@ -552,6 +555,7 @@ t.deamon = True
 t.start()
 
 def getkeywords():
+    '''函数注释'''
     filename1 = tkinter.filedialog.askopenfilename(title='请选择txt文件',
                                                   filetypes=[('TXT Files','*.txt')])
     if filename1:
