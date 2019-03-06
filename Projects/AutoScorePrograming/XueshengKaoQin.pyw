@@ -397,6 +397,16 @@ class windowChakanKaoqinXinxi:
         treeXueshengMingdan.pack(side=tkinter.LEFT, fill=tkinter.Y)
         # 树形控件与垂直滚动条结合
         scrollBar.config(command=treeXueshengMingdan.yview)
+
+        def treeviewClick(event):
+            selectedItem=treeXueshengMingdan.selection()[0]
+            xuehao=treeXueshengMingdan.item(selectedItem,'values')[0]
+            y = tkinter.messagebox.askokcancel("提示","是否删除此条信息？")
+            if y == True:
+                sqll='delete from dianming where xuehao = '+xuehao
+                Common.doSQL(sqll)
+                treeXueshengMingdan.delete(selectedItem)
+        treeXueshengMingdan.bind('<Double-1>',treeviewClick)
 def buttonChakanKaoqinXinxiClick():
     # 如果还没有注册，拒绝运行
     if int_zhuce.get() == 0:
