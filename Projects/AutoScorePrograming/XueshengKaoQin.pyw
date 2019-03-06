@@ -122,24 +122,26 @@ class Common:
 # 关闭程序时，取消点名、收作业、接收提问以及接受客户端查询等状态，避免端口一直占用
 def closeWindow():
     # 结束点名
-    if int_canDianming.get() == 1:
-        int_canDianming.set(0)       
-    # 教师端关闭时，广播消息通知学生端自动关闭
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-    IP = serverIP[:serverIP.rindex('.')]+'.255'
-    sock.sendto(b'close', (IP, 10500))
-##    #结束服务状态
-##    if int_server.get() == 1:
-##        int_server.set(0)
-    int_sendServerIP.set(0)
-    root.destroy()
-    # sql1='delete from students'
-    # sql2='delete from dianming'
-    # Common.doSQL(sql1)
-    # Common.doSQL(sql2)
-    sys.exit()
-    exit()
+    quit = tkinter.messagebox.askokcancel("提示","是否退出？")
+    if quit==True:
+        if int_canDianming.get() == 1:
+            int_canDianming.set(0)       
+        # 教师端关闭时，广播消息通知学生端自动关闭
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+        IP = serverIP[:serverIP.rindex('.')]+'.255'
+        sock.sendto(b'close', (IP, 10500))
+    ##    #结束服务状态
+    ##    if int_server.get() == 1:
+    ##        int_server.set(0)
+        int_sendServerIP.set(0)
+        root.destroy()
+        # sql1='delete from students'
+        # sql2='delete from dianming'
+        # Common.doSQL(sql1)
+        # Common.doSQL(sql2)
+        sys.exit()
+        exit()
 root.protocol('WM_DELETE_WINDOW', closeWindow)
     
 # 控制和检测本软件是否已注册，本软件免费试用，不需要注册
