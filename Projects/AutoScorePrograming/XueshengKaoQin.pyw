@@ -17,6 +17,7 @@ from jieba import load_userdict
 import jieba
 import openpyxl
 import xlrd
+import time
 
 root = tkinter.Tk()
 #root.config(width=360)
@@ -495,8 +496,10 @@ def buttonDaochuClick():
     xuehaoChengjis = Common.getXuehaoChengji()
     for i in xuehaoChengjis:
         ws.append(i.split(','))
-    wb.save('成绩数据.xlsx')
-    tkinter.messagebox.showinfo('恭喜', '数据导出成功，请查看系统文件夹中的"数据导出.xlsx"文件')
+    t = list(time.localtime(time.time()))[:6]
+    fname = '{0}/{1}/{2}-{3}:{4}:{5}成绩数据.xlsx'.format(t[0],t[1],t[2],t[3],t[4],t[5])
+    wb.save(fname)
+    tkinter.messagebox.showinfo('恭喜', '数据导出成功，请查看系统文件夹中的"成绩数据.xlsx"文件')
 buttonDaochu = tkinter.Button(root, text='数据导出', command=buttonDaochuClick)
 buttonDaochu.place(x=130, y=100, height=30, width=100)
 ## =====================数据导出功能代码结束==============================
