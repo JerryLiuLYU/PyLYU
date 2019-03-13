@@ -500,8 +500,8 @@ def buttonDaochuClick():
     xuehaoChengjis = Common.getXuehaoChengji()
     for i in xuehaoChengjis:
         ws.append(i.split(','))
-    t = list(time.localtime(time.time()))[:6]
-    fname = '{0}/{1}/{2}-{3}:{4}:{5}成绩数据.xlsx'.format(t[0],t[1],t[2],t[3],t[4],t[5])
+    t = list(time.localtime(time.time()))[:5]
+    fname = r'{0}年{1}月{2}日{3}时{4}分成绩数据.xlsx'.format(t[0],t[1],t[2],t[3],t[4])
     wb.save(fname)
     tkinter.messagebox.showinfo('恭喜', '数据导出成功，请查看系统文件夹中的"成绩数据.xlsx"文件')
 buttonDaochu = tkinter.Button(root, text='数据导出', command=buttonDaochuClick)
@@ -545,7 +545,8 @@ def everyStudent(conn):
         if i in keyword:
             count = count+1  
     studentkeys[xuehao] = studentkeys.get(xuehao,0)+count
-    sqlkey = "update students set score= "+str(studentkeys[xuehao])+" where xuehao = "+xuehao
+    sqlkey = "update students set score = "+str(studentkeys[xuehao])+" where xuehao = "+xuehao
+    print(sqlkey+"--")
     Common.doSQL(sqlkey)
     conn.close() 
     
