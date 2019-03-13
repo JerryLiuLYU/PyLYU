@@ -277,6 +277,8 @@ def buttonStartDianmingClick():
         tkinter.messagebox.showerror('很抱歉', '现在正在点名')
         return
     tkinter.messagebox.showinfo('恭喜', '设置成功，现在开始点名')
+    buttonStopDianming['state'] = 'normal'
+    buttonStartDianming['state'] = 'disabled'
     #开始点名
     int_canDianming.set(1)
     global tDianming_id
@@ -296,6 +298,8 @@ def buttonStopDianmingClick():
         tkinter.messagebox.showerror('很抱歉', '还没开始点名')
         return
 
+    buttonStopDianming['state'] = 'disabled'
+    buttonStartDianming['state'] = 'normal'
     #停止点名
     int_canDianming.set(0)
     sockDianming.close()
@@ -313,7 +317,7 @@ def buttonStopDianmingClick():
     message = '设置成功，现在停止点名!\n当前点名专业：'+currentZhuanye\
               +'\n应到人数：'+str(totalRenshu) + '\n实到人数：' + str(totalShidao)
     tkinter.messagebox.showinfo('恭喜', message)
-buttonStopDianming = tkinter.Button(root, text='结束点名', command=buttonStopDianmingClick)
+buttonStopDianming = tkinter.Button(root,state='disabled', text='结束点名', command=buttonStopDianmingClick)
 buttonStopDianming.place(x=130, y=60, height=30, width=100)
 ## =====================在线点名功能代码结束==============================
 
@@ -530,12 +534,12 @@ def everyStudent(conn):
            
  # 接收键盘数据    
     temp = conn.recv(40096)  
-    print("-------temp-----")
-    print(temp.decode().lower())
+    # print("-------temp-----")
+    # print(temp.decode().lower())
     print("-------reslult-----")
     result = jieba.lcut(temp.decode().lower())
-    print(result)
-    print(keyword)
+    # print(result)
+    # print(keyword)
     count = 0
     for i in result:
         if i in keyword:
