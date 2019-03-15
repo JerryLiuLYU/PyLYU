@@ -1,8 +1,0 @@
-int
-double
-flout
-import
-len
-get
-print
-input

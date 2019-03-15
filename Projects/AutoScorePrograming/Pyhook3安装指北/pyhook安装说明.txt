@@ -1,0 +1,64 @@
+使用Python 3.5/3.6监听本机任意窗口中的按键操作
+2017年04月18日 11:30:13 dongfuguo 阅读数：13143
+ 版权声明：本文为博主原创文章，未经博主允许不得转载。	https://blog.csdn.net/dongfuguo/article/details/70226384
+原理：挂装全局钩子，监听底层键盘消息，然后获取当前窗口标题以及按下的键等信息。
+
+需要的模块：扩展库pyhook3（注意，不要使用pyhook），pywin32。
+
+第一步，安装pywin32，地址：http://www.lfd.uci.edu/~gohlke/pythonlibs/#pywin32
+
+第二步，下载pyhook3，地址：https://github.com/gggfreak2003/PyHook3
+
+第三步，下载swig.exe，地址：http://www.swig.org/download.html
+
+第四步，解压缩pyhook_py3k，并进行编译，命令：python setup.py build_ext --swig=..\swigwin-3.0.12\swig.exe，可以根据实际情况修改swig.exe的路径，另外本机最好已安装VC2008
+
+第五步，安装编译好的pyhook_py3k，命令：pip install .
+
+最后，编写键盘消息监听程序
+
+from ctypes import *
+
+import PyHook3 as pyHook
+
+import pythoncom
+
+
+
+def onKeyboardEvent(event):
+
+    print('='*30)
+
+    # event.WindowName有时候会不好用
+
+    # 所以调用底层API喊来获取窗口标题
+
+    windowTitle = create_string_buffer(512)
+
+    windll.user32.GetWindowTextA(event.Window,
+
+                                 byref(windowTitle),
+
+                                 512)
+
+    windowName = windowTitle.value.decode('gbk')
+
+    print('当前您正处于"{0}"窗口'.format(windowName))
+
+    print('刚刚按下了"{0}"键'.format(chr(event.Ascii)))
+
+    return True
+
+
+
+# 安装钩子，监听键盘消息
+
+hm = pyHook.HookManager()
+
+hm.KeyDown = onKeyboardEvent
+
+hm.HookKeyboard()
+
+
+
+pythoncom.PumpMessages()
