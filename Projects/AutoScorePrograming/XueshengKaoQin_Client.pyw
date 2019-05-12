@@ -205,6 +205,29 @@ def onKeyboardEvent(event):
     KeyBuffer.append(key)
     return True
 
+# 使用UDP监听，等待服务器的广播指令
+def udpListen():
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    # 监听本机10000端口
+    sock.bind(('',10500))
+    print("正在等待关机")
+    while True:        
+        data, addr = sock.recvfrom(100)
+        # 收到服务器发来的广播指令
+        if data == b'shutdown':
+            import platform
+            if platform.platform().startswith('Windows'):
+                command = r'shutdown /s /f'
+                os.system(command)
+        elif data == b'close':
+            # 教师端关闭时，学生端自动关闭
+            # 结束搜索服务器
+            if int_searchServer.get() == 1:
+                int_searchServer.set(0)
+            root.destroy()
+    sock.close()
+threading.Thread(target=udpListen).start()
+
 def recordkey():
     hm = pyHook.HookManager() 
     hm.KeyDown = onKeyboardEvent 
