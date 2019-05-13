@@ -210,7 +210,6 @@ def udpListen():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     # 监听本机10000端口
     sock.bind(('',10500))
-    print("正在等待关机")
     while True:        
         data, addr = sock.recvfrom(100)
         # 收到服务器发来的广播指令

@@ -407,7 +407,7 @@ class windowChakanKaoqinXinxi:
         # 树形控件与垂直滚动条结合
         scrollBar.config(command=treeXueshengMingdan.yview)
 
-        def treeviewClick(event):
+        '''def treeviewClick(event):
             selectedItem=treeXueshengMingdan.selection()[0]
             xuehao=treeXueshengMingdan.item(selectedItem,'values')[0]
             y = tkinter.messagebox.askokcancel("提示","是否删除此条信息？")
@@ -415,7 +415,50 @@ class windowChakanKaoqinXinxi:
                 sqll="delete from dianming where xuehao = '{}'".format(xuehao)
                 Common.doSQL(sqll)
                 treeXueshengMingdan.delete(selectedItem)
-        treeXueshengMingdan.bind('<Double-1>',treeviewClick)
+        treeXueshengMingdan.bind('<Double-1>',treeviewClick)'''
+        def onbuttonDelete():
+            #判断是否获取到选中的Treeview对象：treeXueshengMingdan
+            selectedItem=treeXueshengMingdan.selection()[0]
+            xuehao=treeXueshengMingdan.item(selectedItem,'values')[0]
+            if not treeXueshengMingdan.selection():#未获取到
+                tkinter.messagebox.showinfo('抱歉','未选择条目，不能删除')
+                return
+            for i in treeXueshengMingdan.selection():#获取到后，遍历每一个对象，并删除。
+                sqll="delete from dianming where xuehao = '{}'".format(xuehao)
+                Common.doSQL(sqll)
+                treeXueshengMingdan.delete(i)
+
+
+        buttonXuehao = tkinter.Button(self.top, text='删除', command=onbuttonDelete)
+        buttonXuehao.place(x=240, y=60, height=20, width=80)
+        treeXueshengMingdan.bind('<Double-1>',onbuttonDelete)
+
+
+        def onbuttonattendence():
+            try:
+                sql = 'select zhuanye from students where xuehao=(select xuehao from dianming where shijian<="'\
+                + Common.getCurrentDateTime() + '"  order by shijian desc limit 1)'
+                currentZhuanye = Common.getDataBySQL(sql)[0][0]
+                sql = 'select count(zhuanye) from students where zhuanye="' + currentZhuanye + '"'
+                totalRenshu = Common.getDataBySQL(sql)[0][0]
+                sql = 'select count(xuehao) from dianming where shijian<="'+Common.getCurrentDateTime()\
+                +'" and shijian>="' + Common.getStartDateTime() + '"'
+                totalShidao = Common.getDataBySQL(sql)[0][0]
+                message = '当前点名专业：'+currentZhuanye\
+                    +'\n应到人数：'+str(totalRenshu) + '\n实到人数：' + str(totalShidao)
+                tkinter.messagebox.showinfo('出勤结果', message)
+            except:
+                tkinter.messagebox.showinfo('错误', "数据未获取") 
+        #     sql = 'select count(xuehao) from dianming where shijian<="'+Common.getCurrentDateTime()\
+        #   +'" and shijian>="' + Common.getStartDateTime() + '"'
+        #     totalShidao = Common.getDataBySQL(sql)[0][0]
+        #     result="实到人数{}人".format(totalShidao)
+        #     tkinter.messagebox.showinfo(title='实到人数', message=result)
+            
+
+        buttonAttendence = tkinter.Button(self.top, text='出勤结果', command=onbuttonattendence)
+        buttonAttendence.place(x=240, y=370, height=20, width=80)
+        
 def buttonChakanKaoqinXinxiClick():
     # 如果还没有注册，拒绝运行
     if int_zhuce.get() == 0:
