@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewsFragment"
+    >
+
+    <Button
+        android:id="@+id/button_new"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cent_55dp"
+        android:layout_marginLeft="@dimen/cent_ten"
+        android:layout_marginTop="@dimen/cent_16dp"
+        android:layout_marginRight="@dimen/cent_ten"
+        android:drawableEnd="@drawable/ic_baseline_east_24"
+        android:gravity="left|center_vertical"
+        android:text="@string/button_new" />
+</FrameLayout>

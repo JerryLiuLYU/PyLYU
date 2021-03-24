@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="cent_ten">10dp</dimen>
+    <dimen name="cent_16dp" >16dp</dimen>
+    <dimen name="cent_20dp">20dp</dimen>
+    <dimen name="cent_25dp">25dp</dimen>
+    <dimen name="text_20sp">20sp</dimen>
+    <dimen name="cent_35dp">35dp</dimen>
+    <dimen name="cent_45dp">45dp</dimen>
+    <dimen name="cent_55dp">55dp</dimen>
+    <dimen name="cent_60dp">60dp</dimen>
+    <dimen name="cent_330dp">330dp</dimen>
+    <dimen name="cent_332dp">332dp</dimen>
+    <dimen name="cent_80dp">80dp</dimen>
+    <dimen name="text_30sp">30sp</dimen>
+    <dimen name="cent_40dp">40dp</dimen>
+    <dimen name="cent_185dp">185dp</dimen>
+    <dimen name="cent_200dp">200dp</dimen>
+    <item name="persent_20" type="dimen">20%</item>
+    <item name="persent_50" type="dimen">50%</item>
+</resources>

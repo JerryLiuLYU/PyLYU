@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">CT</string>
+    <string name="buttonLoginSetin">登录</string>
+    <string name="buttonLoginSetup">注册</string>
+    <string name="editTextLoginPersonNameLogin">请输入用户名/手机号</string>
+    <string name="editTextLoginPasswordLogin">请输入密码</string>
+    <string name="textViewSetup1">用户名：</string>
+    <string name="textViewSetup2">密码：</string>
+    <string name="textViewSetup3">手机号：</string>
+    <string name="textViewSetup4">邮箱：</string>
+    <string name="buttonSetup">登录并注册</string>
+    <string name="menu_news">消息</string>
+    <string name="menu_maillist">通讯录</string>
+    <string name="menu_seek">寻找</string>
+    <string name="menu_personalcenter">个人中心</string>
+    <string name="buttonpersonSetout">登出</string>
+    <string name="none" />
+    <string name="textviewpersonname">姓名</string>
+    <string name="textViewholderseek">用户名</string>
+    <string name="textViewholderseek2">题目</string>
+    <string name="textViewholderseek3">时间</string>
+    <string name="maillist_find">添加/寻找好友</string>
+    <string name="buttonmaillist_find">搜索</string>
+    <string name="button_new">好友申请</string>
+    <string name="personal_modifybutton">修改个人信息</string>
+    <string name="UserMailButton">发送</string>
+</resources>

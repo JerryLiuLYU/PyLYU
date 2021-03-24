@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MaillistFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="@dimen/cent_330dp"
+        android:layout_height="wrap_content"
+        app:boxBackgroundColor="#FFFFFF"
+        app:startIconDrawable="@drawable/ic_baseline_search_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextInputEditText_maillist"
+            android:layout_width="@dimen/cent_330dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/maillist_find" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleView_maillist"
+        android:layout_width="match_parent"
+        android:layout_height="655dp"
+        android:layout_marginLeft="@dimen/cent_16dp"
+        android:layout_marginTop="@dimen/cent_60dp"
+        android:layout_marginRight="@dimen/cent_16dp"
+        android:layout_marginBottom="@dimen/cent_ten">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/buttonmaillist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/cent_332dp"
+        android:layout_marginTop="@dimen/cent_ten"
+        android:text="@string/buttonmaillist_find"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/teal_200" />
+</FrameLayout>

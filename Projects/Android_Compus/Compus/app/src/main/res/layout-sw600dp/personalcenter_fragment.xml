@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PersonalcenterFragment">
+
+    <Button
+        android:id="@+id/buttonpersonSetout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="@dimen/cent_16dp"
+        android:layout_marginRight="@dimen/cent_16dp"
+        android:layout_marginBottom="@dimen/cent_ten"
+        android:layerType="none"
+        android:text="@string/buttonpersonSetout" />
+
+    <ImageView
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginLeft="@dimen/cent_16dp"
+        android:layout_marginTop="@dimen/cent_16dp"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textViewpersonname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="@dimen/cent_25dp"
+        android:text="@string/textViewSetup1"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textViewpersonSetoutname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="@dimen/cent_25dp"
+        android:textSize="@dimen/text_20sp"
+        tools:text="杨康" />
+
+    <Button
+        android:id="@+id/personal_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/cent_16dp"
+        android:layout_marginTop="@dimen/cent_185dp"
+        android:layout_marginRight="@dimen/cent_16dp"
+        android:text="@string/personal_modifybutton" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" />
+
+</FrameLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/NewsFragment"
+        android:icon="@drawable/news"
+        android:title="@string/menu_news" />
+    <item
+        android:id="@+id/MaillistFragment"
+        android:icon="@drawable/maillist"
+        android:title="@string/menu_maillist" />
+    <item
+        android:id="@+id/SeekFragment"
+        android:icon="@drawable/seek"
+        android:title="@string/menu_seek" />
+    <item
+        android:id="@+id/PersonalcenterFragment"
+        android:icon="@drawable/person"
+        android:title="@string/menu_personalcenter" />
+</menu>
